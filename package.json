@@ -1,0 +1,21 @@
+{
+  "name": "Unicoder",
+  "version": "0.1",
+  "description": "Unicode coverter use electron.Be kind to minetest",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "todolist"
+  ],
+  "author": "Wzy2006",
+  "license": "GPLv3",
+  "devDependencies": {
+    "electron": "^8.0.3"
+  }
+}
