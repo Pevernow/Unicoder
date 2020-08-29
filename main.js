@@ -1,14 +1,15 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, screen} = require('electron')
+const {app, BrowserWindow, screen, globalShortcut} = require('electron')
+const path = require("path")
 
 function createWindow () {
   // Create the browser window.
   let size = screen.getPrimaryDisplay().workAreaSize
-  let width=parseInt(size.width * 0.2);
-  let height=parseInt(size.height*0.3);
+  //let width=parseInt(size.width * 0.2);
+  //let height=parseInt(size.height*0.3);
   const mainWindow = new BrowserWindow({
-    width: width,
-    height: height,
+    width: 500,
+    height: 500,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
@@ -42,3 +43,13 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+app.whenReady().then(() => {
+  // Register a 'CommandOrControl+X' shortcut listener.
+  const ret = globalShortcut.register('CommandOrControl+X', () => {
+    console.log('CommandOrControl+X is pressed')
+  })
+
+  if (!ret) {
+    console.log('registration failed')
+  }
+})
