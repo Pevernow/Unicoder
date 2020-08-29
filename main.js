@@ -53,6 +53,7 @@ app.whenReady().then(() => {
     mainWindow.show();
     mainWindow.focus();
     mainWindow.webContents.executeJavaScript("document.getElementById('input').focus()");
+    mainWindow.webContents.executeJavaScript("document.getElementById('input').value=''")
   })
 
   if (!ret) {
