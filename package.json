@@ -5,11 +5,26 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . Unicoder --out build --arch=x64 --overwrite" 
+    "build": "electron-builder --win --x64" 
   },
   "author": "Pevernow",
   "license": "GPLv3",
   "devDependencies": {
     "electron": "^8.0.3"
+  },
+  "build": {
+    "appId": "com.pevernow.unicoder",
+	"directories": { 
+      "output": "build"
+    },
+	"mac": {
+	  "target": ["dmg","zip"]
+	},
+	"win": {
+	  "target": ["zip"]
+	},
+	"linux": {
+	  "target": ["deb","pacman","zip"]
+	}
   }
 }
