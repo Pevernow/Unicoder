@@ -1,7 +1,6 @@
 const clipboard = require("electron").clipboard;
-console.log("preloaded")
+const mainWindow = require("electron").remote.getCurrentWindow();
 function copy(str){
-    alert();
    clipboard.writeText(str);
 }
 function ch2Unicdoe(str){
@@ -19,6 +18,7 @@ window.onkeydown = function () {
     if (13 == event.keyCode) {
         //On enter
         var text=document.getElementById("input").value;
-        copy(ch2Unicdoe(text));
+		copy(ch2Unicdoe(text));
+		mainWindow.hide();
     }
 }

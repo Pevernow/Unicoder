@@ -5,18 +5,21 @@ const path = require("path")
 function createWindow () {
   // Create the browser window.
   let size = screen.getPrimaryDisplay().workAreaSize
-  //let width=parseInt(size.width * 0.2);
-  //let height=parseInt(size.height*0.3);
-  const mainWindow = new BrowserWindow({
-    width: 500,
-    height: 500,
+  let width=parseInt(size.width * 0.2);
+  let height=parseInt(size.height*0.3);
+  mainWindow = new BrowserWindow({
+    width: width,
+    height: height,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      enableRemoteModule: true
     },
     transparent: true,
     frame: false
   })
-  mainWindow.webContents.openDevTools();
+  mainWindow.hide();
+  mainWindow.setAlwaysOnTop(true);
+  //mainWindow.webContents.openDevTools();
   mainWindow.setSkipTaskbar(true);
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
@@ -45,8 +48,11 @@ app.on('activate', function () {
 // code. You can also put them in separate files and require them here.
 app.whenReady().then(() => {
   // Register a 'CommandOrControl+X' shortcut listener.
-  const ret = globalShortcut.register('CommandOrControl+X', () => {
-    console.log('CommandOrControl+X is pressed')
+  const ret = globalShortcut.register('CommandOrControl+Alt+T', () => {
+    console.log("run")
+    mainWindow.show();
+    mainWindow.focus();
+    mainWindow.webContents.executeJavaScript("document.getElementById('input').focus()");
   })
 
   if (!ret) {
